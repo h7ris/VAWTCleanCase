@@ -20055,8 +20055,8 @@ Plane Surface(7) = {2};
 BooleanDifference{ Surface{5}; Delete;}{ Surface{6,7}; Delete;}
 Extrude {0, 0, 1} {Surface{1}; Surface{5}; Layers{1}; Recombine;}
 Physical Surface("Interface11") = {20};
-Physical Surface("Interface12") = {10};
-Physical Surface("ConcentratorF") = {11:18};
+Physical Surface("Interface12") = {14};
+Physical Surface("ConcentratorF") = {10:13,15:18};
 Physical Surface("InletP") = {6};
 Physical Surface("OutletP") = {9};
 Physical Surface("Wall1s") = {7};
