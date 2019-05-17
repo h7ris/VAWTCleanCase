@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sbatch ./Batchjob
+
+squeue -u h7ris

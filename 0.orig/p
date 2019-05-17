@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      p;
+//https://cfd.direct/openfoam/user-guide/boundaries/
+//https://www.cfdsupport.com/OpenFOAM-Training-by-CFD-Support/node93.html
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    Inlet
+    {
+        type            zeroGradient;
+    }
+
+    Outlet
+    {
+	type            fixedValue;
+        value           uniform 0;
+    }
+
+    Blade
+    {
+        type            zeroGradient;
+    }
+
+    Concentrator
+    {
+        type            zeroGradient;
+    }
+
+}
+// ************************************************************************* //

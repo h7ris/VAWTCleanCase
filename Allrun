@@ -1,0 +1,31 @@
+#!/bin/sh
+
+cd ${0%/*} || exit 1    # Run from this directory
+
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+CASE_DIR=/oasis/scratch/comet/h7ris/temp_project/NumericalValidations/BaselineCase/TSR1
+
+a="$(squeue -n TSR1 -u h7ris)"
+
+SLURM_JOBID=$(echo $a | awk '{print $9}')
+
+NODE_DIR=/scratch/$USER/$SLURM_JOBID
+
+mkdir $NODE_DIR/TestCase
+
+cp -r $CASE_DIR/* $NODE_DIR/TestCase/
+
+timeout 47h mpirun -np 24 pimpleFoam -case $NODE_DIR/TestCase -parallel | tee $NODE_DIR/TestCase/pimplefoam.log
+
+mkdir $CASE_DIR/postProcessing
+
+cp -r $NODE_DIR/TestCase/postProcessing/* $CASE_DIR/postProcessing/
+
+mkdir $CASE_DIR/SimHist
+
+cp -r $NODE_DIR/TestCase/* $CASE_DIR/SimHist/
+
+cp -r $NODE_DIR/TestCase/pimplefoam.log $CASE_DIR/
+
+rm -rf $NODE_DIR/TestCase

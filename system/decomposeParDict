@@ -1,0 +1,31 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      decomposeParDict;
+}
+// https://cfd.direct/openfoam/user-guide/running-applications-parallel/
+// https://www.cfdsupport.com/OpenFOAM-Training-by-CFD-Support/node90.html
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+preservePatches         (AMI1 AMI2);
+
+numberOfSubdomains 24;
+
+method          scotch;
+
+distributed     no;
+
+roots           ( );
+
+// ************************************************************************* //
+
+

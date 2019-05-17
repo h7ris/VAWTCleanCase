@@ -1,0 +1,56 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      k;
+}
+// https://cpp.openfoam.org/v3/a10800.html
+// https://www.cfdsupport.com/OpenFOAM-Training-by-CFD-Support/node93.html
+// https://www.cfd-online.com/Wiki/Turbulence_free-stream_boundary_conditions
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0.015;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    Inlet
+    {
+        type            fixedValue;
+        value           uniform 0.015;
+    }
+
+    Outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.015;
+        value           uniform 0.015;
+    }
+
+    Blade
+    {
+        type            kqRWallFunction;
+        value           uniform 0.00015;
+    }
+
+    Concentrator
+    {
+        type            kqRWallFunction;
+        value           uniform 0.00015;
+    }
+}
+
+
+// ************************************************************************* //

@@ -1,0 +1,125 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.x                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      createPatchDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Do a synchronisation of coupled points after creation of any patches.
+// Note: this does not work with points that are on multiple coupled patches
+//       with transformations (i.e. cyclics).
+pointSync false;
+
+// Patches to create.
+patches
+(
+    {
+        //- Master side patch
+        name            AMI1;
+        patchInfo
+        {
+            type            cyclicAMI;
+            matchTolerance  0.00001;
+            neighbourPatch  AMI2;
+            transform       noOrdering;
+        }
+        constructFrom patches;
+        patches (Interface11);
+    }
+
+    {
+        //- Slave side patch
+        name            AMI2;
+        patchInfo
+        {
+            type            cyclicAMI;
+            matchTolerance  0.00001;
+            neighbourPatch  AMI1;
+            transform       noOrdering;
+        }
+        constructFrom patches;
+        patches (Interface12);
+    }
+
+
+    {
+        name Inlet;
+        patchInfo
+        {
+            type            patch;
+        }
+        constructFrom patches;
+        patches (InletP);
+    }
+    {
+        name Outlet;
+        patchInfo
+        {
+            type            patch;
+        }
+        constructFrom patches;
+        patches (OutletP);
+    }
+
+    {
+        name Wall1;
+        patchInfo
+        {
+            type            symmetry;
+        }
+        constructFrom patches;
+        patches (Wall1s);
+    }
+
+    {
+        name Wall2;
+        patchInfo
+        {
+            type            symmetry;
+        }
+        constructFrom patches;
+        patches (Wall2s);
+    }
+
+    {
+        name Blade;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (BladeF);
+    }
+
+    {
+        name Concentrator;
+        patchInfo
+        {
+            type            wall;
+        }
+        constructFrom patches;
+        patches (ConcentratorF);
+    }
+
+    {
+        name FrontandBack;
+        patchInfo
+        {
+            type            empty;
+        }
+        constructFrom patches;
+        patches (FrontandBackF);
+    }
+
+);
+
+// ************************************************************************* //
