@@ -1,1 +1,5 @@
 foamrun
+*.msh
+*.pos
+constant/polyMesh/
+processor*
