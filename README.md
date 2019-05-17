@@ -48,8 +48,7 @@ rm -rf ./Turbine.msh
 rm -rf processor*
 rm -rf *.pos
 rm -rf *.msh
-cd constant
-rm -rf polyMesh
+rm -rf constant/polyMesh
 ```
 
 8. Run OpenFOAM on the supercomputer!
