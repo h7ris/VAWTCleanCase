@@ -51,4 +51,12 @@ rm -rf *.msh
 rm -rf constant/polyMesh
 ```
 
-8. Run OpenFOAM on the supercomputer!
+8. Run OpenFOAM on the supercomputer! 
+
+
+## Help
+
+If you want to run it locally, you can edit `decomposeParDict` to 4 (or however many cores you have), go through the process, and run
+```
+mpirun -np 4 pimpleFoam -parallel | tee pimplefoam.log
+```
