@@ -3,3 +3,4 @@ foamrun
 *.pos
 constant/polyMesh/
 processor*
+localruns/
