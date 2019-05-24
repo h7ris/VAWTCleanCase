@@ -3,4 +3,7 @@ foamrun
 *.pos
 constant/polyMesh/
 processor*
+pimplefoam.log
+postProcessing/
 localruns/
+setup.log
