@@ -6,7 +6,7 @@
 ## Store outputs in new folder in localruns
 FOLDER=localruns/run.`ls localruns/ | wc -l`
 mkdir -p $FOLDER
-echo "Start time:" `date` >> $FOLDER/timings.txt
+echo "Start time:                        " `date` >> $FOLDER/timings.txt
 
 ## Delete older intermediate files (except Turbine.msh)
 rm -rf pimplefoam.log
@@ -14,7 +14,7 @@ rm -rf postProcessing
 rm -rf processor*
 rm -rf *.pos
 rm -rf constant/polyMesh
-echo "Finished removing old files:" `date` >> $FOLDER/timings.txt
+echo "Finished removing old files:       " `date` >> $FOLDER/timings.txt
 
 ## Get ready for OpenFOAM computation
 gmshToFoam ./Turbine.msh
@@ -27,7 +27,7 @@ echo "Now ready for OpenFOAM computation:" `date` >> $FOLDER/timings.txt
 
 ## Run OpenFOAM computation
 mpirun -np 4 pimpleFoam -parallel | tee pimplefoam.log
-echo "Done with OpenFOAM computation:" `date` >> $FOLDER/timings.txt
+echo "Done with OpenFOAM computation:    " `date` >> $FOLDER/timings.txt
 
 ## Copy files to output folder
 cp postProcessing/forces/0/coefficient.dat $FOLDER/
@@ -35,4 +35,4 @@ cp pimplefoam.log $FOLDER/
 cp system/controlDict $FOLDER/
 cp system/fvSchemes $FOLDER/
 cp system/fvSolution $FOLDER/
-echo "Done copying files:" `date` >> $FOLDER/timings.txt
+echo "Done copying files:                " `date` >> $FOLDER/timings.txt
